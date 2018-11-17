@@ -16,7 +16,7 @@ public class Material implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String nombre;
     private String descripcion;
@@ -28,8 +28,8 @@ public class Material implements Serializable {
 
 
 
-    public void setId(long id){this.id=id;}
-    public long getId(){return this.id;}
+    public void setId(Long id){this.id=id;}
+    public Long getId(){return this.id;}
 
 
     public void setNombre(String nombre){this.nombre=nombre;}

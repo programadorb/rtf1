@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import net.sourceforge.barbecue.BarcodeImageHandler;
 import net.sourceforge.barbecue.BarcodeFactory;
 import com.udea.ejb.MaterialEJB;
+import com.udea.model.Material;
 import org.primefaces.context.RequestContext;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
@@ -38,8 +39,24 @@ public class MaterialManagedBean implements Serializable
     private String valor;
     private String rutaArchivo;
 
+    private List<Material> listaMaterial;
+
     @EJB
     private MaterialEJB materialEJB;
+
+    public void guardarMaterial(){
+        Material m=new Material();
+        m.setNombre(nombre);
+        m.setDescripcion(descripcion);
+        m.setAutor(autor);
+        m.setValor(valor);
+        m.setRutaArchivo(rutaArchivo);
+        materialEJB.guardar(m);
+    }
+
+    public void llenarListaMaterial(){
+        listaMaterial=materialEJB.getMateriales();
+    }
 
 
     public void setNombre(String nombre){this.nombre=nombre;}
@@ -61,4 +78,6 @@ public class MaterialManagedBean implements Serializable
     public void setRutaArchivo(String rutaArchivo){this.rutaArchivo=rutaArchivo;}
     public String getRutaArchivo(){return this.rutaArchivo;}
 
+    public List<Material> getListaMaterial(){return this.listaMaterial;}
 }
+

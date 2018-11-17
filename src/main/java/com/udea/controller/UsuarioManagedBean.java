@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import javax.faces.context.FacesContext;
 import javax.annotation.PostConstruct;
 import java.util.UUID;
+import com.udea.model.Usuario;
 
 @Named(value="UsuarioManagedBean")
 @SessionScoped
@@ -33,17 +34,36 @@ public class UsuarioManagedBean implements Serializable
     private static final long serialVersionUID = 120101L;
 
     private String email;
+    private String nombre;
     private String password;
 
     @EJB
     private UsuarioEJB usuarioEJB;
 
     public void login(){
-        System.out.println("va a hacer el login");
+        if(!usuarioEJB.login(email, password)){
+            info("Credenciales incorrectas");
+        }
+        redireccionar("faces/index.xhtml");
     }
 
+    
+
     public void registrar(){
-        
+        Usuario u =new Usuario();
+        u.setNombre(nombre);
+        u.setEmail(email);
+        u.setPassword(password);
+    }
+
+    public void redireccionar(String url) {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("");
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    protected void info(String msg){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, ""));
     }
 
     public void setEmail(String email){this.email=email;}
@@ -51,4 +71,7 @@ public class UsuarioManagedBean implements Serializable
 
     public void setPassword(String password){this.password=password;}
     public String getPassword(){return this.password;}
+
+    public void setNombre(String nombre){this.nombre=nombre;}
+    public String getNombre(){return this.nombre;}
 }

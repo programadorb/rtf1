@@ -3,8 +3,8 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
   http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    <description>laboratorio2</description>
-    <display-name>laboratorio2</display-name>
+    <description>matedu</description>
+    <display-name>matedu</display-name>
 
     <context-param>
         <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
