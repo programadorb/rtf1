@@ -6,10 +6,10 @@ xmlns:f="http://java.sun.com/jsf/core"
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:c="http://java.sun.com/jsp/jstl/core"
 >
-<head>
+<h:head>
   <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<title>Healthy Child</title>
+<title>Matedu</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
 <!-- Bootstrap 3.3.7 -->
@@ -23,10 +23,9 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
 <!-- AdminLTE Skins. Choose a skin from the css/skins
       folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css" />
-<!-- Morris chart -->
-<link rel="stylesheet" href="bower_components/morris.js/morris.css" />
+
 <!-- jvectormap -->
-<link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css" />
+
 <!-- Date Picker -->
 <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" />
 <!-- Daterange picker -->
@@ -43,7 +42,7 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
 
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
-</head>
+</h:head>
 <body class="hold-transition skin-blue sidebar-mini" >
 
 
@@ -52,37 +51,38 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
   <article class="container-login center-block">
   <section>
     <ul id="top-bar" class="nav nav-tabs nav-justified">
-      <li class="active"><a href="#login-access">Registro</a></li>
+      <li class="active"><a href="#login-access">Crear cuenta</a></li>
+
     </ul>
     <div class="tab-content tabs-login col-lg-12 col-md-12 col-sm-12 cols-xs-12">
       <div id="login-access" class="tab-pane fade active in">
-        <h2><i class="glyphicon glyphicon-log-in"></i> Crear Cuenta</h2>						
-        <form method="post" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal">
+        <h2><i class="glyphicon glyphicon-log-in"></i> Crear cuenta</h2>						
+        <h:form method="post" role="form" class="form-horizontal">
           <div class="form-group ">
             <label for="login" class="sr-only">Email</label>
-              <input type="text" class="form-control" name="login" id="login_value" 
-                placeholder="Email" tabindex="1" value="" />
+            <p:inputText value="#{UsuarioManagedBean.email}" placeholder="Email" styleClass="form-control" />
           </div>
-
           <div class="form-group ">
-            <label for="login" class="sr-only">Nombre</label>
-              <input type="text" class="form-control" name="login" id="login_value" 
-                placeholder="Nombre" tabindex="1" value="" />
+            <label for="login" class="sr-only">Email</label>
+            <p:inputText value="#{UsuarioManagedBean.nombre}" placeholder="Nombre" styleClass="form-control" />
           </div>
           <div class="form-group ">
             <label for="password" class="sr-only">Password</label>
-              <input type="password" class="form-control" name="password" id="password"
-                placeholder="Password" value="" tabindex="2" />
+            <p:password value="#{UsuarioManagedBean.password}" placeholder="Password" styleClass="form-control" />
           </div>
+          <div style="color:red">
+              ${UsuarioManagedBean.mensaje}
+          </div>
+
           <div class="checkbox">
-              <label class="control-label" for="remember_me">
-              </label>
           </div>
           <br/>
           <div class="form-group ">				
-              <button type="submit" name="log-me-in" id="submit" tabindex="5" class="btn btn-lg btn-primary">Crear cuenta</button>
+                <p:commandButton value="Crear cuenta" id="ajax" action="#{UsuarioManagedBean.registrar}" style="margin-right:20px;" styleClass="ui-priority-primary" />
+                <br/>
+                <br/>
           </div>
-        </form>			
+        </h:form>			
       </div>
     </div>
   </section>
@@ -103,15 +103,11 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
 <script src="bower_components/raphael/raphael.min.js"></script>
-<script src="bower_components/morris.js/morris.min.js"></script>
+
 <!-- Sparkline -->
-<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-<!-- jvectormap -->
-<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
+
+
+
 <script src="bower_components/moment/min/moment.min.js"></script>
 <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
@@ -119,9 +115,9 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
 <!-- Bootstrap WYSIHTML5 -->
 <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+
 <!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -130,123 +126,109 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
 <script src="dist/js/demo.js"></script>
 
 <style> 
-  @import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
+
+body {
+    font-family: Open Sans;
+    font-size: 14px;
+    line-height: 1.42857;
+    background: #333333;
+    height: 350px;
+    padding: 0;
+    margin: 0;
+}
+.container-login {
+    min-height: 0;
+    width: 480px;
+    color: #333333;
+    margin-top: 40px;
+    padding: 0;
+}
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.container-login > section {
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 10px;
+}
+#top-bar {
+    display: inherit;
+}
+.nav-tabs.nav-justified {
+    border-bottom: 0 none;
+    width: 100%;
+}
+.nav-tabs.nav-justified > li {
+    display: table-cell;
+    width: 1%;
+    float: none;
+}
+.container-login .nav-tabs.nav-justified > li > a,
+.container-login .nav-tabs.nav-justified > li > a:hover,
+.container-login .nav-tabs.nav-justified > li > a:focus {
+    background: #ea533f;
+    border: medium none;
+    color: #ffffff;
+    margin-bottom: 0;
+    margin-right: 0;
+    border-radius: 0;
+}
+.container-login .nav-tabs.nav-justified > .active > a,
+.container-login .nav-tabs.nav-justified > .active > a:hover,
+.container-login .nav-tabs.nav-justified > .active > a:focus {
+    background: #ffffff;
+    color: #333333;
+}
+.container-login .nav-tabs.nav-justified > li > a:hover,
+.container-login .nav-tabs.nav-justified > li > a:focus {
+    background: #de2f18;
+}
+.tabs-login {
+    background: #ffffff;
+    border: medium none;
+    margin-top: -1px;
+    padding: 10px 30px;
+}
+.container-login h2 {
+    color: #ea533f;
+}
+.form-control {
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #999999;
+    border-radius: 0;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #333333;
+    display: block;
+    font-size: 14px;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+.container-login .checkbox {
+    margin-top: -15px;
+}
+.container-login button {
+    background-color: #ea533f;
+    border-color: #e73e28;
+    color: #ffffff;
+    border-radius: 0;
+    font-size: 18px;
+    line-height: 1.33;
+    padding: 10px 16px;
+    width: 100%;
+}
+.container-login button:hover,
+.container-login button:focus {
+    background: #de2f18;
+    border-color: #be2815;
+}
+</style>
   
-  body {
-      font-family: Open Sans;
-      font-size: 14px;
-      line-height: 1.42857;
-      background: #333333;
-      height: 350px;
-      padding: 0;
-      margin: 0;
-  }
-  .container-login {
-      min-height: 0;
-      width: 480px;
-      color: #333333;
-      margin-top: 40px;
-      padding: 0;
-  }
-  .center-block {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-  }
-  .container-login > section {
-      margin-left: 0;
-      margin-right: 0;
-      padding-bottom: 10px;
-  }
-  #top-bar {
-      display: inherit;
-  }
-  .nav-tabs.nav-justified {
-      border-bottom: 0 none;
-      width: 100%;
-  }
-  .nav-tabs.nav-justified > li {
-      display: table-cell;
-      width: 1%;
-      float: none;
-  }
-  .container-login .nav-tabs.nav-justified > li > a,
-  .container-login .nav-tabs.nav-justified > li > a:hover,
-  .container-login .nav-tabs.nav-justified > li > a:focus {
-      background: #ea533f;
-      border: medium none;
-      color: #ffffff;
-      margin-bottom: 0;
-      margin-right: 0;
-      border-radius: 0;
-  }
-  .container-login .nav-tabs.nav-justified > .active > a,
-  .container-login .nav-tabs.nav-justified > .active > a:hover,
-  .container-login .nav-tabs.nav-justified > .active > a:focus {
-      background: #ffffff;
-      color: #333333;
-  }
-  .container-login .nav-tabs.nav-justified > li > a:hover,
-  .container-login .nav-tabs.nav-justified > li > a:focus {
-      background: #de2f18;
-  }
-  .tabs-login {
-      background: #ffffff;
-      border: medium none;
-      margin-top: -1px;
-      padding: 10px 30px;
-  }
-  .container-login h2 {
-      color: #ea533f;
-  }
-  .form-control {
-      background-color: #ffffff;
-      background-image: none;
-      border: 1px solid #999999;
-      border-radius: 0;
-      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-      color: #333333;
-      display: block;
-      font-size: 14px;
-      height: 34px;
-      line-height: 1.42857;
-      padding: 6px 12px;
-      transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-      width: 100%;
-  }
-  .container-login .checkbox {
-      margin-top: -15px;
-  }
-  .container-login button {
-      background-color: #ea533f;
-      border-color: #e73e28;
-      color: #ffffff;
-      border-radius: 0;
-      font-size: 18px;
-      line-height: 1.33;
-      padding: 10px 16px;
-      width: 100%;
-  }
-  .container-login button:hover,
-  .container-login button:focus {
-      background: #de2f18;
-      border-color: #be2815;
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </style>
 </body>
 </html>

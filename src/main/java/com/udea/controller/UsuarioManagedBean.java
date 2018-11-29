@@ -1,30 +1,14 @@
 package com.udea.controller;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.List;
-import com.udea.utils.Utilidades;
-import javax.faces.context.ExternalContext;
-import java.io.File;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-import java.io.FileInputStream;
-import javax.ejb.EJB;
-import net.sourceforge.barbecue.BarcodeImageHandler;
-import net.sourceforge.barbecue.BarcodeFactory;
-import com.udea.ejb.UsuarioEJB;
-import org.primefaces.context.RequestContext;
+
 import java.io.Serializable;
+
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import javax.faces.application.FacesMessage;
-import javax.servlet.http.HttpServletRequest;
-import javax.faces.bean.ManagedProperty;
-import java.util.Map;
-import javax.servlet.http.HttpSession;
 import javax.faces.context.FacesContext;
-import javax.annotation.PostConstruct;
-import java.util.UUID;
+import javax.inject.Named;
+
+import com.udea.ejb.UsuarioEJB;
 import com.udea.model.Usuario;
 
 @Named(value="UsuarioManagedBean")
@@ -36,29 +20,49 @@ public class UsuarioManagedBean implements Serializable
     private String email;
     private String nombre;
     private String password;
+    private String mensaje;
 
     @EJB
     private UsuarioEJB usuarioEJB;
 
-    public void login(){
-        if(!usuarioEJB.login(email, password)){
-            info("Credenciales incorrectas");
+    public void login() {   
+        mensaje = "";
+        if (usuarioEJB.login(email, password)) {
+            System.out.println("el login fue exitoso");
+            redireccionar("/matedu/faces/index.xhtml");
+        }else{
+            System.out.println("el login fue fallido");
+            mensaje = "Credenciales incorrectas";
         }
-        redireccionar("faces/index.xhtml");
     }
 
-    
+    /**
+     * @return the mensaje
+     */
+    public String getMensaje() {
+        return mensaje;
+    }
 
-    public void registrar(){
-        Usuario u =new Usuario();
+    /**
+     * @param mensaje the mensaje to set
+     */
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public void registrar() {
+        Usuario u = new Usuario();
         u.setNombre(nombre);
         u.setEmail(email);
         u.setPassword(password);
+        usuarioEJB.registrar(u);
+        System.out.println("usuario registrado");
+        redireccionar("/matedu/faces/index.xhtml");
     }
 
     public void redireccionar(String url) {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("");
+            FacesContext.getCurrentInstance().getExternalContext().redirect(url);
         } catch (Exception e) {e.printStackTrace();}
     }
 

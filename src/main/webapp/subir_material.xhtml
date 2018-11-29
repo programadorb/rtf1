@@ -7,10 +7,13 @@ xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:c="http://java.sun.com/jsp/jstl/core"
 
 >
-<head>
+<h:head>
   <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<title>Healthy Child</title>
+<title>Matedu</title>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
 <!-- Bootstrap 3.3.7 -->
@@ -27,7 +30,7 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
 <!-- Morris chart -->
 <link rel="stylesheet" href="bower_components/morris.js/morris.css" />
 <!-- jvectormap -->
-<link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css" />
+
 <!-- Date Picker -->
 <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" />
 <!-- Daterange picker -->
@@ -41,11 +44,11 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
-</head>
-<body class="hold-transition skin-blue sidebar-mini" >
+</h:head>
+<h:body class="hold-transition skin-blue sidebar-mini" >
 <div class="wrapper">
 
   <ui:include src="./topbar.xhtml" />
@@ -76,17 +79,26 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
     <div class="col-md-10">
     <div class="panel panel-default">
       <div class="panel-heading"><strong>Subir Material</strong> <small> </small></div>
+      <h:form >
       <div class="panel-body">
           <div class="form-group ">
               <label for="login" class="sr-only">Autor</label>
-                <input type="text" class="form-control" name="login" id="login_value" 
-                  placeholder="Autor" tabindex="1" value="" />
+                <p:inputText value="#{MaterialManagedBean.autor}" placeholder="Autor" styleClass="form-control" />
             </div>
 
             <div class="form-group ">
-                <label for="login" class="sr-only">Nombre</label>
-                  <input type="text" class="form-control" name="login" id="login_value" 
-                    placeholder="Nombre" tabindex="1" value="" />
+                <label for="login" class="sr-only">Titulo del material</label>
+                <p:inputText value="#{MaterialManagedBean.nombre}" placeholder="Titulo del material" styleClass="form-control" />
+              </div>
+            
+              <div class="form-group ">
+                <label for="login" class="sr-only">URL de la portada</label>
+                <p:inputText value="#{MaterialManagedBean.valor}" placeholder="URL de la portada" styleClass="form-control" />
+              </div>
+
+              <div class="form-group ">
+                <label for="login" class="sr-only">Descripción</label>                
+                <p:inputTextarea rows="6" cols="50" value="#{MaterialManagedBean.descripcion}" placeholder="Descripción" styleClass="form-control" />
               </div>
 
         <div class="input-group image-preview">
@@ -100,7 +112,6 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
             <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>
             <!-- rename it --> 
           </div>
-          <button type="button" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-upload"></i> </span>Subir</button>
           </span> 
         </div>
         <!-- /input-group image-preview [TO HERE]--> 
@@ -117,10 +128,11 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
         <br />
 
         <div class="form-group ">				
-            <button type="submit" name="log-me-in" id="submit" tabindex="5" class="btn btn-lg btn-primary">Subir material</button>
+            <p:commandButton value="Subir Material" id="ajax" action="#{MaterialManagedBean.guardarMaterial}" style="margin-right:20px;" styleClass="btn btn-lg btn-primary" oncomplete="alert('Guardado exitoso');" />
         </div>
 
       </div>
+    </h:form>
     </div>
   </div>
       
@@ -341,9 +353,7 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
@@ -370,13 +380,10 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
 <!-- Slimscroll -->
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
 
 <style>
   /* layout.css Style */
@@ -424,5 +431,6 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
     margin-left:2px;
 }
 </style>
-</body>
+    
+</h:body>
 </html>

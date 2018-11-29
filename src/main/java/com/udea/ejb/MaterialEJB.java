@@ -1,14 +1,14 @@
 package com.udea.ejb;
-import java.util.ArrayList;
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+
 import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import java.util.List;
-import java.util.Map;
-import javax.ejb.Local;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import com.udea.model.Material;
 
 @Stateless

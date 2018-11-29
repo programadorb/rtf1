@@ -6,10 +6,10 @@ xmlns:f="http://java.sun.com/jsf/core"
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:c="http://java.sun.com/jsp/jstl/core"
 >
-<head>
+<h:head>
   <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<title>Healthy Child</title>
+<title>Matedu</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
 <!-- Bootstrap 3.3.7 -->
@@ -43,8 +43,11 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
 
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
-</head>
-<body class="hold-transition skin-blue sidebar-mini" >
+</h:head>
+<h:body class="hold-transition skin-blue sidebar-mini" >
+  <f:metadata>
+      <f:event type="preRenderView" listener="#{MaterialManagedBean.buscar}"/>
+  </f:metadata>
 <div class="wrapper">
 
   <ui:include src="./topbar.xhtml" />
@@ -67,42 +70,13 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
     <!-- Main content -->
     <div>
         <div calss="row">
-            <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
-             <img src="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/V13028_Low.png" data-original="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/V13028_Low.png" class="bookimage " alt="MongoDB Essentials - A Complete MongoDB Guide [Video] Book Cover" title="MongoDB Essentials - A Complete MongoDB Guide [Video] from Packt" style="opacity: 1;"/>
-            </div>
-            <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
-             <img src="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/B12565_Low.png" data-original="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/B12565_Low.png" class="bookimage " alt="Machine Learning with AWS Book Cover" title="Machine Learning with AWS from Packt" style="opacity: 1;"/>
-           </div>
-           <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
-             <img src="https://d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/V12966_Low.png" data-original="https://d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/V12966_Low.png" class="bookimage " alt="Accelerated ES6 Training [Video] Book Cover" title="Accelerated ES6 Training [Video] from Packt" style="opacity: 1;"/>
-           </div>
-           <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
-             <img src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/10980_Low.png" data-original="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/10980_Low.png" class="bookimage " alt="Android Application Architecture [Video] Book Cover" title="Android Application Architecture [Video] from Packt" style="opacity: 1;" />
-           </div>
-           <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
-             <img src="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/V13028_Low.png" data-original="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/V13028_Low.png" class="bookimage " alt="MongoDB Essentials - A Complete MongoDB Guide [Video] Book Cover" title="MongoDB Essentials - A Complete MongoDB Guide [Video] from Packt" style="opacity: 1;"/>
-            </div>
-            <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
-             <img src="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/B12565_Low.png" data-original="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/B12565_Low.png" class="bookimage " alt="Machine Learning with AWS Book Cover" title="Machine Learning with AWS from Packt" style="opacity: 1;"/>
-           </div>
-           <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
-             <img src="https://d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/V12966_Low.png" data-original="https://d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/V12966_Low.png" class="bookimage " alt="Accelerated ES6 Training [Video] Book Cover" title="Accelerated ES6 Training [Video] from Packt" style="opacity: 1;"/>
-           </div>
-           <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
-             <img src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/10980_Low.png" data-original="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/10980_Low.png" class="bookimage " alt="Android Application Architecture [Video] Book Cover" title="Android Application Architecture [Video] from Packt" style="opacity: 1;" />
-           </div>
-           <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
-             <img src="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/V13028_Low.png" data-original="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/V13028_Low.png" class="bookimage " alt="MongoDB Essentials - A Complete MongoDB Guide [Video] Book Cover" title="MongoDB Essentials - A Complete MongoDB Guide [Video] from Packt" style="opacity: 1;"/>
-            </div>
-            <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
-             <img src="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/B12565_Low.png" data-original="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/B12565_Low.png" class="bookimage " alt="Machine Learning with AWS Book Cover" title="Machine Learning with AWS from Packt" style="opacity: 1;"/>
-           </div>
-           <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
-             <img src="https://d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/V12966_Low.png" data-original="https://d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/V12966_Low.png" class="bookimage " alt="Accelerated ES6 Training [Video] Book Cover" title="Accelerated ES6 Training [Video] from Packt" style="opacity: 1;"/>
-           </div>
-           <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
-             <img src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/10980_Low.png" data-original="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/featured_book_block/bookretailers/10980_Low.png" class="bookimage " alt="Android Application Architecture [Video] Book Cover" title="Android Application Architecture [Video] from Packt" style="opacity: 1;" />
-           </div>
+            <c:forEach items="#{MaterialManagedBean.listaMaterial}" var="material">
+                  <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12" style="margin-top:2em;">
+                    <a href="${material.rutaArchivo}" target="_blank">
+                        <img src="${material.valor}" style="opacity: 1;"/>
+                    </a>
+                   </div>
+            </c:forEach>        
          </div>
     </div>
     <!-- /.content -->
@@ -349,5 +323,5 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-</body>
+</h:body>
 </html>

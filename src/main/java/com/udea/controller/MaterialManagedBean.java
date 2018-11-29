@@ -1,31 +1,17 @@
 package com.udea.controller;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.ArrayList;
+
+import java.io.Serializable;
 import java.util.List;
-import com.udea.utils.Utilidades;
-import javax.faces.context.ExternalContext;
-import java.io.File;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-import java.io.FileInputStream;
+
 import javax.ejb.EJB;
-import net.sourceforge.barbecue.BarcodeImageHandler;
-import net.sourceforge.barbecue.BarcodeFactory;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+
 import com.udea.ejb.MaterialEJB;
 import com.udea.model.Material;
+
 import org.primefaces.context.RequestContext;
-import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
-import javax.faces.application.FacesMessage;
-import javax.servlet.http.HttpServletRequest;
-import javax.faces.bean.ManagedProperty;
-import java.util.Map;
-import javax.servlet.http.HttpSession;
-import javax.faces.context.FacesContext;
-import javax.annotation.PostConstruct;
-import java.util.UUID;
 
 @Named(value="MaterialManagedBean")
 @SessionScoped
@@ -37,21 +23,42 @@ public class MaterialManagedBean implements Serializable
     private String descripcion;
     private String autor;
     private String valor;
-    private String rutaArchivo;
+    private String rutaArchivo="http://localhost:8080/matedu/faces/book.pdf";
 
     private List<Material> listaMaterial;
-
+    int indice = 1;
     @EJB
     private MaterialEJB materialEJB;
 
-    public void guardarMaterial(){
-        Material m=new Material();
+    public void buscar(){
+        try{
+//if(!FacesContext.getCurrentInstance().isPostback()){
+                listaMaterial=materialEJB.getMateriales();
+//}
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void guardarMaterial() {
+        System.out.println("va a guaradr el mateiral");
+        Material m = new Material();
         m.setNombre(nombre);
         m.setDescripcion(descripcion);
         m.setAutor(autor);
         m.setValor(valor);
-        m.setRutaArchivo(rutaArchivo);
+        m.setRutaArchivo(rutaArchivo+(indice++%5+1));
         materialEJB.guardar(m);
+        System.out.println("termino de guardar el material");
+        buscar();
+        nombre="";
+        autor="";
+        valor="";
+        descripcion="";
+    }
+
+    public void ejecutarScript(String script){
+        RequestContext.getCurrentInstance().execute(script);
     }
 
     public void llenarListaMaterial(){

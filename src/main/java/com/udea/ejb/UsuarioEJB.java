@@ -25,7 +25,9 @@ public class UsuarioEJB implements Serializable {
     }
 
     public void registrar(Usuario usuario){
+        System.out.println("va a registrar un usuario");
         em.persist(usuario);
+        System.out.println("usuario registrado con exito");
     }
 
     public void acutalizarDatosUsaurio(Usuario usuario){
@@ -33,6 +35,10 @@ public class UsuarioEJB implements Serializable {
     }
 
     public boolean login(String email, String password){
-        return !em.createQuery("select u from Usuario where u.email = :email and u.password=:password").getResultList().isEmpty();
+        System.out.println("el email es : "+email);
+        System.out.println("el password es : "+password);
+        return !em.createQuery("select u from Usuario u where u.email = '"+email+"' and u.password = '"+password+"' ")
+            .getResultList()
+            .isEmpty();
     }
 }
